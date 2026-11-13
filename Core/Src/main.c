@@ -129,7 +129,9 @@ int fputc(int ch, FILE *f)
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
+  * @brief  程序入口：初始化外设后进入主循环
+  * @note   初始化顺序：HAL -> 时钟 -> GPIO(含 EXTI) -> RTC -> TIM3 -> USART2 -> DMA
+  *         主循环只做三件事：发按键信息、解析串口帧、发 RTC 时间
   * @retval int
   */
 int main(void)
@@ -227,7 +229,7 @@ int main(void)
 }
 
 /**
-  * @brief System Clock Configuration
+  * @brief  系统时钟配置：HSE 8 MHz 经 PLL 倍频到 168 MHz
   * @retval None
   */
 void SystemClock_Config(void)
@@ -306,12 +308,6 @@ static void Led_Marquee_Step(void)
   }
 }
 
-/**
-  * @brief  串口帧接收状态机（在 USART2 接收中断回调里逐字节调用）
-  * @param  rx 刚收到的 1 个字节
-  * @retval 1 = 收到完整一帧（内容已存入 chRxBuf，不含 $ 和 *）
-  * @note   帧格式：$0,1,YYMMDD,HHMMSS*     以 '$' 开头、'*' 结尾
-  */
 /**
   * @brief  把一段串口数据逐字节喂给帧状态机（DMA+IDLE 收到后整段调用）
   * @param  buf 数据首地址
@@ -475,7 +471,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
+  * @brief  错误兜底：初始化失败时关中断并停在这里，方便调试器定位
   * @retval None
   */
 void Error_Handler(void)
@@ -490,8 +486,7 @@ void Error_Handler(void)
 }
 #ifdef USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
+  * @brief  参数断言失败时的回调（仅 USE_FULL_ASSERT 打开时启用）
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None

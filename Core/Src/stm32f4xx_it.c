@@ -66,7 +66,7 @@ extern UART_HandleTypeDef huart2;
 /*           Cortex-M4 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
-  * @brief This function handles Non maskable interrupt.
+  * @brief  NMI 不可屏蔽中断：本工程不使用，出错即停机
   */
 void NMI_Handler(void)
 {
@@ -81,7 +81,7 @@ void NMI_Handler(void)
 }
 
 /**
-  * @brief This function handles Hard fault interrupt.
+  * @brief  硬件错误中断：访问非法地址/总线错误时进入，停机便于定位
   */
 void HardFault_Handler(void)
 {
@@ -96,7 +96,7 @@ void HardFault_Handler(void)
 }
 
 /**
-  * @brief This function handles Memory management fault.
+  * @brief  存储器管理错误中断（MPU 相关），本工程未启用 MPU
   */
 void MemManage_Handler(void)
 {
@@ -111,7 +111,7 @@ void MemManage_Handler(void)
 }
 
 /**
-  * @brief This function handles Pre-fetch fault, memory access fault.
+  * @brief  总线错误中断：取指或访存失败
   */
 void BusFault_Handler(void)
 {
@@ -126,7 +126,7 @@ void BusFault_Handler(void)
 }
 
 /**
-  * @brief This function handles Undefined instruction or illegal state.
+  * @brief  未定义指令中断：执行到非法指令
   */
 void UsageFault_Handler(void)
 {
@@ -141,7 +141,7 @@ void UsageFault_Handler(void)
 }
 
 /**
-  * @brief This function handles System service call via SWI instruction.
+  * @brief  SVC 系统服务调用中断：本工程不用 RTOS，空实现
   */
 void SVC_Handler(void)
 {
@@ -154,7 +154,7 @@ void SVC_Handler(void)
 }
 
 /**
-  * @brief This function handles Debug monitor.
+  * @brief  调试监视中断：本工程不使用
   */
 void DebugMon_Handler(void)
 {
@@ -167,7 +167,7 @@ void DebugMon_Handler(void)
 }
 
 /**
-  * @brief This function handles Pendable request for system service.
+  * @brief  PendSV 可挂起系统调用：供 RTOS 任务切换用，本工程空实现
   */
 void PendSV_Handler(void)
 {
@@ -180,7 +180,7 @@ void PendSV_Handler(void)
 }
 
 /**
-  * @brief This function handles System tick timer.
+  * @brief  SysTick 1 ms 中断：调用 HAL_IncTick() 维持 HAL 毫秒时基
   */
 void SysTick_Handler(void)
 {
@@ -201,7 +201,8 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line0 interrupt.
+  * @brief  EXTI0 中断入口（PA0 / B1 按键上升沿）
+  * @note   HAL_GPIO_EXTI_IRQHandler 负责清挂起位，再回调 HAL_GPIO_EXTI_Callback
   */
 void EXTI0_IRQHandler(void)
 {
@@ -215,7 +216,7 @@ void EXTI0_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM3 global interrupt.
+  * @brief  TIM3 更新中断入口：每 250 ms 触发一次，驱动跑马灯走一步
   */
 void TIM3_IRQHandler(void)
 {
@@ -229,7 +230,7 @@ void TIM3_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles USART2 global interrupt.
+  * @brief  USART2 中断入口：处理接收/发送完成与错误，内部回调帧状态机
   */
 void USART2_IRQHandler(void)
 {

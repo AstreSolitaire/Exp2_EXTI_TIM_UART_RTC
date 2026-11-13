@@ -2,8 +2,9 @@
 /**
   ******************************************************************************
   * @file           : main.h
-  * @brief          : Header for main.c file.
-  *                   This file contains the common defines of the application.
+  * @brief          : 主头文件
+  *                   集中定义：板级引脚编号、跨文件共享变量声明、
+  *                   串口 DMA 收发接口（Uart_* 系列）
   ******************************************************************************
   * @attention
   *

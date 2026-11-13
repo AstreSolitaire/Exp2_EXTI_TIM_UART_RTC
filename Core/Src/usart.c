@@ -2,8 +2,13 @@
 /**
   ******************************************************************************
   * @file    usart.c
-  * @brief   This file provides code for the configuration
-  *          of the USART instances.
+  * @brief   串口 USART2 配置 + DMA 收发实现
+  *
+  *  本文件两部分：
+  *    1) 外设配置：9600-8-N-1，PA2/PA3 复用为 AF7（HAL_UART_MspInit）
+  *    2) DMA 收发：TX 走 DMA1_Stream6 + 512B 环形 FIFO；
+  *       RX 走 DMA1_Stream5 + 空闲(IDLE)中断
+  *  上层调用 Uart_SendAsync()/printf 只入队立即返回，字节由 DMA 硬件搬运。
   ******************************************************************************
   * @attention
   *
@@ -186,8 +191,10 @@ void Uart_DmaInit(void)
 
 UART_HandleTypeDef huart2;
 
-/* USART2 init function */
-
+/**
+  * @brief  USART2 通信参数配置
+  * @note   波特率 9600、8 数据位、1 停止位、无校验、收发模式；HAL 会据此算出 BRR 分频
+  */
 void MX_USART2_UART_Init(void)
 {
 

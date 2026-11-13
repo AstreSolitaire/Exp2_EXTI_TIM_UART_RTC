@@ -2,8 +2,8 @@
 /**
   ******************************************************************************
   * @file    rtc.h
-  * @brief   This file contains all the function prototypes for
-  *          the rtc.c file
+  * @brief   RTC 接口声明
+  *          MX_RTC_Init()：日历分频、初始时间、1 Hz 秒中断
   ******************************************************************************
   * @attention
   *

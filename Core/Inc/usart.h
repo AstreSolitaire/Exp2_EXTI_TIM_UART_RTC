@@ -2,8 +2,8 @@
 /**
   ******************************************************************************
   * @file    usart.h
-  * @brief   This file contains all the function prototypes for
-  *          the usart.c file
+  * @brief   串口接口声明
+  *          MX_USART2_UART_Init()：9600-8-N-1 参数配置；DMA 接口在 main.h 中声明
   ******************************************************************************
   * @attention
   *

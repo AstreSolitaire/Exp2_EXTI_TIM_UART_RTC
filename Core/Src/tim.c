@@ -2,8 +2,13 @@
 /**
   ******************************************************************************
   * @file    tim.c
-  * @brief   This file provides code for the configuration
-  *          of the TIM instances.
+  * @brief   定时器 TIM3 初始化（250 ms 时基）
+  *
+  *  原理：定时器是"计数器"，时钟每来一拍加 1，加到 ARR 就产生更新事件。
+  *  本工程用它做跑马灯节拍，每 250 ms 触发一次更新中断：
+  *    TIM3 时钟 = APB1 定时器时钟 = 42 MHz × 2 = 84 MHz（APB1 分频≠1 时自动×2）
+  *    PSC = 8399 -> 84 MHz / 8400 = 10 kHz
+  *    ARR = 2499 -> (2499+1) / 10 kHz = 250 ms（落在要求的 200~500 ms 内）
   ******************************************************************************
   * @attention
   *
@@ -26,7 +31,10 @@
 
 TIM_HandleTypeDef htim3;
 
-/* TIM3 init function */
+/**
+  * @brief  TIM3 参数配置（预分频、计数周期、计数模式）
+  * @note   只配置不启动；启动与中断使能在 main.c 里完成
+  */
 void MX_TIM3_Init(void)
 {
 

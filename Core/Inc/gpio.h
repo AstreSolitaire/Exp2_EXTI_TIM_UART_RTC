@@ -2,8 +2,8 @@
 /**
   ******************************************************************************
   * @file    gpio.h
-  * @brief   This file contains all the function prototypes for
-  *          the gpio.c file
+  * @brief   GPIO 初始化接口声明
+  *          MX_GPIO_Init()：负责 LED 输出、按键输入/EXTI、串口地参考引脚
   ******************************************************************************
   * @attention
   *

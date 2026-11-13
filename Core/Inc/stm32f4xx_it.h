@@ -2,7 +2,8 @@
 /**
   ******************************************************************************
   * @file    stm32f4xx_it.h
-  * @brief   This file contains the headers of the interrupt handlers.
+  * @brief   中断服务函数声明
+  *          包含 Cortex-M 系统异常与 EXTI0 / TIM3 / USART2 / RTC_WKUP 四个外设中断
   ******************************************************************************
   * @attention
   *

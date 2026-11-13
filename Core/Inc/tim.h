@@ -2,8 +2,8 @@
 /**
   ******************************************************************************
   * @file    tim.h
-  * @brief   This file contains all the function prototypes for
-  *          the tim.c file
+  * @brief   定时器接口声明
+  *          MX_TIM3_Init()：250 ms 更新中断的时基参数
   ******************************************************************************
   * @attention
   *

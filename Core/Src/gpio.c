@@ -2,8 +2,13 @@
 /**
   ******************************************************************************
   * @file    gpio.c
-  * @brief   This file provides code for the configuration
-  *          of all used GPIO pins.
+  * @brief   GPIO 引脚初始化
+  *
+  *  本文件把"普通用途"的引脚配置成正确工作模式：
+  *    PD12/PD13/PD14/PD15 -> 推挽输出，驱动 4 颗用户 LED（LD4/LD3/LD5/LD6）
+  *    PA0                 -> 输入 + 下拉，接 B1 按键，并配置上升沿 EXTI0 中断
+  *    PE4                 -> 推挽输出低电平，作为串口线地参考
+  *  PA2/PA3 属串口复用引脚，在 usart.c 的 HAL_UART_MspInit 中配置。
   ******************************************************************************
   * @attention
   *
@@ -32,13 +37,11 @@
 
 /* USER CODE END 1 */
 
-/** Configure pins as
-        * Analog
-        * Input
-        * Output
-        * EVENT_OUT
-        * EXTI
-*/
+/**
+  * @brief  GPIO 初始化总入口（main 启动时调用一次）
+  * @note   每类引脚都是同一套路：先开端口时钟 -> 先写初始电平 -> 填配置结构体 -> HAL_GPIO_Init
+  *         顺序不能反：先写电平再切模式，避免引脚在切换瞬间闪一下
+  */
 void MX_GPIO_Init(void)
 {
 

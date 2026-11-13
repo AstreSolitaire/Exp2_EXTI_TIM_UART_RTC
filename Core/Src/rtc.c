@@ -2,8 +2,12 @@
 /**
   ******************************************************************************
   * @file    rtc.c
-  * @brief   This file provides code for the configuration
-  *          of the RTC instances.
+  * @brief   RTC 实时时钟配置 + 1 Hz 秒中断回调
+  *
+  *  RTC 位于"备份域"，主电源断开后仍可靠电池走时，由低速时钟驱动日历：
+  *    LSI ≈ 32 kHz -> 异步分频 128 -> 250 Hz -> 同步分频 250 -> 1 Hz
+  *  用"唤醒定时器"产生 1 秒一次中断，在中断里读时间并格式化成字符串。
+  *  注意：开发板未焊 32.768 kHz 晶振，只能用内部 LSI，精度约 ±1%。
   ******************************************************************************
   * @attention
   *
@@ -26,7 +30,10 @@
 
 RTC_HandleTypeDef hrtc;
 
-/* RTC init function */
+/**
+  * @brief  RTC 初始化：分频参数、初始时间、启动 1 Hz 秒中断
+  * @note   分频 127/249 把 LSI 的 32 kHz 变成日历需要的 1 Hz
+  */
 void MX_RTC_Init(void)
 {
 
