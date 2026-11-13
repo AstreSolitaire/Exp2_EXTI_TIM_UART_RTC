@@ -267,10 +267,6 @@ INT1=PE0、INT2=PE1）：EXTI 中断框架（本工程的 EXTI0）正好可用�
 
 本项目采用 **MIT License**，详见 [LICENSE](LICENSE)。
 
-```
-MIT License  Copyright (c) 2026 AstreSolitaire
-可自由使用、修改、分发（含商用），保留版权声明即可，不提供任何担保。
-```
-
-`Drivers/` 下的 CMSIS 与 STM32F4xx HAL 驱动由 STMicroelectronics 提供，
-遵循其随 STM32Cube FW_F4 发布的原始许可（各目录内 `LICENSE.txt`）。
+- 可自由使用、修改、分发（含商业用途），只需保留版权与许可声明；软件按“原样”提供，不附带担保。
+-  下的 CMSIS 与 STM32F4xx HAL 驱动由 ARM / STMicroelectronics 提供，
+  遵循其原始许可，详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
