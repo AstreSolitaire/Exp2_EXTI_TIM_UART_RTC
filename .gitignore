@@ -1,0 +1,11 @@
+*.o
+*.crf
+*.d
+*.lst
+*.dep
+*.lnp
+*.sct
+*.htm
+*.log
+tools/logs/
+RTE/
