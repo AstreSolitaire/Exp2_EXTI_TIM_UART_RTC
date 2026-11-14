@@ -11,23 +11,6 @@
 
 ## 运行效果（实拍与实测）
 
-**⓪ 模块讲解视频**（3 分 59 秒，中文旁白，逐模块讲架构与代码）：
-
-▶ [`docs/media/exp2_explainer.mp4`](docs/media/exp2_explainer.mp4)
-
-| 时间 | 内容 |
-|---|---|
-| 00:00 | 封面与工程概览 |
-| 00:13 | 总体架构：四个中断 + 一个主循环 |
-| 00:42 | 系统时钟 168 MHz（PLL 推导、Scale1、5WS） |
-| 01:07 | GPIO 与 EXTI0 按键中断（菱形 LED 排布、三级链路） |
-| 01:32 | TIM3 250 ms 定时（分频计算、顺/逆时针） |
-| 01:56 | USART2 与 DMA（FIFO 链式发送、RX 空闲中断） |
-| 02:23 | RTC（LSI 分频、读时序、星期计算） |
-| 02:49 | 串口帧协议与解析（状态机、sscanf、校验） |
-| 03:16 | 主循环与并发（标志位、volatile） |
-| 03:36 | 验证与交付 |
-
 **① 硬件实拍**：复位/按键后 LED 跑马灯按 250 ms 节拍绕圈运行
 
 ▶ [`docs/media/hardware_demo.mp4`](docs/media/hardware_demo.mp4)
